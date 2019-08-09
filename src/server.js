@@ -1,3 +1,3 @@
 export class Server {
-    app = {};
+    app() {}
 }
