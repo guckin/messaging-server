@@ -4,6 +4,7 @@ import {MessageService} from "../../src/messageService";
 
 describe('MessageService', () => {
 
+    // i dont know
     let portSpyValue: number;
     let onCalled: boolean;
 
