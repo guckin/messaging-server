@@ -1,6 +1,6 @@
-import {Server} from 'http'
-import * as SocketIO from 'socket.io'
-import {Message} from "./models/message";
+import {Server} from 'http';
+import * as SocketIO from 'socket.io';
+import {Message} from './models/message';
 
 export class MessageService {
 
