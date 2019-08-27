@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf node_modules build",
-    "start": "node build/src/index.js",
+    "start": "node build/src/startServer.js",
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "e2e": "./rune2e.sh"
   },
   "author": "",
   "license": "ISC",

@@ -3,13 +3,18 @@ import {Observable} from 'rxjs';
 import {Observer} from 'rxjs';
 import {Message} from '../../src/models/message';
 
-class SocketClient {
+// TODO: rename to MessageClient
+export class SocketClient {
     private socket: SocketIOClient.Socket;
 
     constructor(private readonly url: string) {}
 
     initSocket() {
         this.socket = socketIo(this.url);
+    }
+
+    close() {
+        this.socket.close();
     }
 
     public onMessage(): Observable<Message> {
