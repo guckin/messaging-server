@@ -7,9 +7,6 @@ import {MessageService} from './messageService';
 const app = express();
 const server = createServer(app);
 const io = socketIo(server);
-const messageService = new MessageService(server, io, 80);
 
-export {
-    messageService
-};
+export const messageService = new MessageService(server, io, 80);
 
