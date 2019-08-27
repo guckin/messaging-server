@@ -1,6 +1,6 @@
-import {Server} from "http";
-import * as SocketIO from "socket.io";
-import {MessageService} from "../../src/messageService";
+import {Server} from 'http';
+import * as SocketIO from 'socket.io';
+import {MessageService} from '../../src/messageService';
 
 describe('MessageService', () => {
 
@@ -17,10 +17,10 @@ describe('MessageService', () => {
         actualPortValue = 0;
         portSpyValue = null;
         onCalled = null;
-        messageService = null
+        messageService = null;
     });
 
-    test('listens on the given port', ()=> {
+    test('listens on the given port', () => {
         initMessageServiceWithPortAs(42);
         expectPortValueToEqual(42);
     });
@@ -41,10 +41,10 @@ describe('MessageService', () => {
         mockServer = new MockServer() as any;
         mockIO = new MockIO() as any;
         messageService = new MessageService(mockServer, mockIO, actualPortValue);
-        messageService.init()
+        messageService.init();
     }
 
-    function initMessageServiceWithPortAs(newPortValue: number){
+    function initMessageServiceWithPortAs(newPortValue: number) {
         actualPortValue = newPortValue;
         initMessageService();
     }
