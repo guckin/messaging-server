@@ -60,7 +60,6 @@ describe('SocketEventWrapper', () => {
 
     function expectConnectedValueToBe(value: any) {
         attachEvents();
-        console.log(socket.emitted);
         expect(socket.emitted.get('clientConnected')).toEqual(value);
     }
 
