@@ -1,4 +1,8 @@
-import {BuiltInEventCallback, IHandleEvents, PassBackEventCallback} from './models/eventemitter';
+import {
+    BuiltInEventCallback,
+    IHandleEvents,
+    PassBackEventCallback
+} from './models/eventemitter';
 import {disconnect} from 'cluster';
 
 export class SocketEventWrapper implements IHandleEvents {
@@ -37,9 +41,10 @@ export class SocketEventWrapper implements IHandleEvents {
     }
 
     private attachedRegisteredEventsTo(socket: any) {
-        this.registeredPassBackEventsMap.forEach((cb: PassBackEventCallback<any>, name: string) => {
+        this.registeredPassBackEventsMap
+            .forEach((cb: PassBackEventCallback<any>, name: string) => {
                 socket.on(name, cb);
-        });
+            });
     }
 
     private attachDisconnectEventTo(socket: any) {
