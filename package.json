@@ -7,9 +7,12 @@
     "clean": "rm -rf node_modules build",
     "start": "node build/src/startServer.js",
     "build": "tsc",
+    "prebuild": "rm -rf build",
     "test": "jest",
     "pretest": "npm run build",
-    "e2e": "./rune2e.sh"
+    "e2e": "./rune2e.sh",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
+    "pretest:debug": "npm run build"
   },
   "author": "",
   "license": "ISC",

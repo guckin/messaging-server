@@ -43,9 +43,8 @@ export class SocketEventWrapper implements IHandleEvents {
     }
 
     private attachDisconnectEventTo(socket: any) {
-        const self = this;
-        socket.on('disconnect', function () {
-            socket.emit('clientDisconnected', self.onDisconnectCallback());
+        socket.on('disconnect', () => {
+            socket.emit('clientDisconnected', this.onDisconnectCallback());
         });
     }
 }

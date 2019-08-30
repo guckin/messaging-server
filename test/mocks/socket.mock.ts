@@ -9,6 +9,7 @@ export class SocketMock {
     }
 
     on(name: string, callback: () => void) {
+        callback();
         if (name === 'disconnect') {
             this.disconnectedEvent = callback;
             return;
