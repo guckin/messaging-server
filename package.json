@@ -8,6 +8,7 @@
     "start": "node build/src/startServer.js",
     "build": "tsc",
     "test": "jest",
+    "pretest": "npm run build",
     "e2e": "./rune2e.sh"
   },
   "author": "",
