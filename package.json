@@ -11,7 +11,7 @@
     "test": "jest",
     "pretest": "npm run build",
     "e2e": "./rune2e.sh",
-    "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "pretest:debug": "npm run build"
   },
   "author": "",

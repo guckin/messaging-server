@@ -43,7 +43,9 @@ describe('SocketEventWrapper', () => {
 
         registerEvents(eventsToRegister);
 
-        expectRegisteredEventsToBe(eventsToRegister);
+        eventsToRegister.forEach((event) => {
+            expectEmittedEventToReturnValue(event[0], event[1](socket.callCallbackWith));
+        });
     });
 
     function setConnectValue(value: any) {
@@ -60,12 +62,12 @@ describe('SocketEventWrapper', () => {
 
     function expectConnectedValueToBe(value: any) {
         attachEvents();
-        expect(socket.emitted.get('clientConnected')).toEqual(value);
+        expect(emittedValue('clientConnected')).toEqual(value);
     }
 
     function expectDisconnectedValueToBe(value: any) {
         attachEvents();
-        expect(socket.emitted.get('clientDisconnected')).toEqual(value);
+        expect(emittedValue('clientDisconnected')).toEqual(value);
     }
 
     function expectConnectEventRegisteredOnIOEventToBe(bool: boolean) {
@@ -83,7 +85,11 @@ describe('SocketEventWrapper', () => {
         attachEvents();
     }
 
-    function expectRegisteredEventsToBe(events: [string, (data: any) => any][]) {
-        expect(socket.registeredEvents).toEqual(new Map(events));
+    function expectEmittedEventToReturnValue(eventName: string, value: any) {
+        expect(emittedValue(eventName)).toEqual(value);
+    }
+
+    function emittedValue(key: string): any {
+        return socket.emitted.get(key);
     }
 });
