@@ -1,9 +1,6 @@
-
 export type PassBackEventCallback<T> = (data: T | undefined) => T;
 export type BuiltInEventCallback = () => any;
-
-
-export interface IHandleEvents {
+export interface EventEmitter {
     onConnect(cb: BuiltInEventCallback): void;
     onDisconnect(cb: BuiltInEventCallback): void;
     registerPassBackEvent<T>(name: string, cb: PassBackEventCallback<T>): void;

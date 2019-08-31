@@ -13,29 +13,29 @@ describe('SocketEventWrapper', () => {
         socketEventWrapper = new SocketEventWrapper(io);
     });
 
-    it('After the events are attached it registers the connect event on the io object ', function () {
+    it('After the events are attached it registers the connect event on the io object ', () => {
         attachEvents();
 
         expectConnectEventRegisteredOnIOEventToBe(true);
     });
 
-    it('Before the events are attached it does not register the connect event', function () {
+    it('Before the events are attached it does not register the connect event', () => {
         expectConnectEventRegisteredOnIOEventToBe(false);
     });
 
-    it('sets the correct data on connect emit', function () {
+    it('sets the correct data on connect emit', () => {
         setConnectValue('foo');
 
         expectConnectedValueToBe('foo');
     });
 
-    it('emits the correct data for disconnect', function () {
+    it('emits the correct data for disconnect', () => {
         setDisconnectValue('bar');
 
         expectDisconnectedValueToBe('bar');
     });
 
-    it('emits data back on registered events', function () {
+    it('emits data back on registered events', () => {
         const eventsToRegister: [string, (data: string) => any][] = [
             ['foo', (data: any) => 'bar'],
             ['baz', (data: any) => data ]
