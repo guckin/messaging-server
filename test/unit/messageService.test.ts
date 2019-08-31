@@ -1,55 +1,36 @@
-import {Server} from 'http';
-import * as SocketIO from 'socket.io';
 import {MessageService} from '../../src/messageService';
+import {Log} from '../../src/interfaces/log';
+import {EventEmitter} from '../../src/interfaces/eventemitter';
+import {Message} from '../../src/models/message';
+import {MessageLog} from '../../src/messageLog';
+import {MockSocketEventWrapper} from '../mocks/socketEventWrapper.mock';
 
 describe('MessageService', () => {
 
-    let portSpyValue: number;
-    let onCalled: boolean;
-
-    let actualPortValue: number;
-    let mockServer: Server;
-    let mockIO: SocketIO.Server;
+    let log: Log<Message>;
+    let socketEventWrapper: EventEmitter;
     let messageService: MessageService;
-
+    let message: Message;
 
     beforeEach(() => {
-        actualPortValue = 0;
-        portSpyValue = null;
-        onCalled = null;
-        messageService = null;
+        message = {
+            author: 'foo',
+            date: 'bar',
+            content: 'baz'
+        };
+        log = new MessageLog(1);
+        socketEventWrapper = new MockSocketEventWrapper(message);
+        messageService = new MessageService(log, socketEventWrapper);
     });
 
-    test('listens on the given port', () => {
-        initMessageServiceWithPortAs(42);
-        expectPortValueToEqual(42);
+    it('Sends the correct log on connect ', function () {
+        messageService.setup();
+        expect(log.toArray()).toEqual([message]);
     });
 
-    class MockServer {
-        listen(port: number) {
-            portSpyValue = port;
-        }
-    }
+    it('Handles with the correct event name', () => {
+        messageService.setup();
+        expect((socketEventWrapper as any).eventName).toEqual('message');
+    });
 
-    class MockIO {
-        on(event: string, cb: (socket: any) => void) {
-            // TODO test this some how
-        }
-    }
-
-    function initMessageService() {
-        mockServer = new MockServer() as any;
-        mockIO = new MockIO() as any;
-        messageService = new MessageService(mockServer, mockIO, actualPortValue);
-        messageService.init();
-    }
-
-    function initMessageServiceWithPortAs(newPortValue: number) {
-        actualPortValue = newPortValue;
-        initMessageService();
-    }
-
-    function expectPortValueToEqual(expectedPortValue: number) {
-        expect(portSpyValue).toEqual(expectedPortValue);
-    }
 });

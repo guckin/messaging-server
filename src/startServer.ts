@@ -1,2 +1,2 @@
-import {messageService} from './index';
-messageService.init();
+import {messageServer} from './index';
+messageServer.start();

@@ -1,10 +1,10 @@
 import {
     BuiltInEventCallback,
-    IHandleEvents,
+    EventEmitter,
     PassBackEventCallback
 } from './interfaces/eventemitter';
 
-export class SocketEventWrapper implements IHandleEvents {
+export class SocketEventWrapper implements EventEmitter {
 
     private registeredPassBackEventsMap = new Map<string, PassBackEventCallback<any>>();
 

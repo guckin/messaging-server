@@ -1,35 +1,40 @@
-import {Server} from 'http';
-import * as SocketIO from 'socket.io';
 import {Message} from './models/message';
+import {Service} from './interfaces/service';
+import {Log} from './interfaces/log';
+import {EventEmitter} from './interfaces/eventemitter';
 
-export class MessageService {
+export class MessageService implements Service {
 
     constructor(
-        private readonly server: Server,
-        private readonly io: SocketIO.Server,
-        private readonly port: number
+        private readonly messageLog: Log<Message>,
+        private readonly socketEventWrapper: EventEmitter
     ) {}
 
-    init() {
-        this.listen();
-        this.attachEvents();
+    setup() {
+        this.socketEventWrapper.onConnect(this.connectHandler());
+        this.socketEventWrapper.onDisconnect(this.disconnectHandler());
+        this.socketEventWrapper.registerPassBackEvent('message', this.messageHandler());
+        this.socketEventWrapper.attachEvents();
     }
 
-    private listen() {
-        this.server.listen(this.port);
+    private connectHandler(): () => Message[] {
+        return () => {
+            console.log('Client Connected');
+            return this.messageLog.toArray();
+        };
     }
 
-    private attachEvents() {
-        this.io.on('connect', (socket: any) => {
-            console.log('Connected client on port %s.', this.port);
-            socket.on('message', (m: Message) => {
-                console.log('[server](message): %s', JSON.stringify(m));
-                this.io.emit('message', m);
-            });
-
-            socket.on('disconnect', () => {
-                console.log('Client disconnected');
-            });
-        });
+    private messageHandler(): (msg: Message) => Message {
+        return (message: Message) => {
+            this.messageLog.push(message);
+            return message;
+        };
     }
+
+    private disconnectHandler(): () => void {
+        return () => {
+            console.log('Client Disconnected');
+        };
+    }
+
 }
