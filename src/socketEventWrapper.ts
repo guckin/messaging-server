@@ -2,8 +2,7 @@ import {
     BuiltInEventCallback,
     IHandleEvents,
     PassBackEventCallback
-} from './models/eventemitter';
-import {disconnect} from 'cluster';
+} from './interfaces/eventemitter';
 
 export class SocketEventWrapper implements IHandleEvents {
 
