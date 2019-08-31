@@ -1,0 +1,8 @@
+{
+  "clearMocks": true,
+  "coverageDirectory": "coverage",
+  "testEnvironment": "node",
+  "testMatch": [
+    "**/?(*.)+(e2e).js"
+  ]
+}
