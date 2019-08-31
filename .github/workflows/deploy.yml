@@ -25,9 +25,12 @@ jobs:
           CI: true
       - name: authenticate
         uses: actions/gcloud/auth@master
-      - name:  gcloud deploy
-        uses: actions/gcloud/cli@master
-        args: app deploy
         env:
           GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
+      - name:  gcloud deploy
+        uses: actions/gcloud/cli@master
+        run: gcloud app deploy
+        env:
+          GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
+
 
