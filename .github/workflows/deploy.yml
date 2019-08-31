@@ -33,5 +33,6 @@ jobs:
           args: app deploy
         env:
           GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
+          CLOUDSDK_CORE_PROJECT: ${{ secrets.PROJECT_NAME }}
 
 
