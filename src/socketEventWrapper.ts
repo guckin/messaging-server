@@ -16,7 +16,10 @@ export class SocketEventWrapper implements EventEmitter {
     private onDisconnectCallback: BuiltInEventCallback = () => undefined;
 
     attachEvents(): void {
+        console.log('hey');
         this.io.on('connect', (socket: any) => {
+            console.log('connected');
+            socket.join('main');
             this.attachConnectEvent(socket);
             this.attachedRegisteredEventsTo(socket);
             this.attachDisconnectEventTo(socket);
@@ -43,7 +46,9 @@ export class SocketEventWrapper implements EventEmitter {
         this.registeredPassBackEventsMap
             .forEach((cb: PassBackEventCallback<any>, name: string) => {
                 socket.on(name, (data: any) => {
-                    socket.emit(name, cb(data));
+                    const msgData = cb(data);
+                    console.log('emitting message in main - message: ', cb(data).content);
+                    this.io.in('main').emit(name, msgData);
                 });
             });
     }
