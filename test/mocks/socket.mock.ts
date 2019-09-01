@@ -17,4 +17,8 @@ export class SocketMock {
         }
         this.registeredEvents.set(name, callback);
     }
+
+    join(room: string) {
+
+    }
 }

@@ -18,7 +18,6 @@ export class SocketEventWrapper implements EventEmitter {
     attachEvents(): void {
         console.log('hey');
         this.io.on('connect', (socket: any) => {
-            console.log('connected');
             socket.join('main');
             this.attachConnectEvent(socket);
             this.attachedRegisteredEventsTo(socket);

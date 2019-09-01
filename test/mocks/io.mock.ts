@@ -10,4 +10,10 @@ export class IOMock {
         this.lastOnNameRegistered = name;
         cb(this.socket);
     }
+
+    in() {
+        return {
+            emit: () => {}
+        };
+    }
 }

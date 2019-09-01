@@ -2,7 +2,7 @@ import {SocketEventWrapper} from '../../src/socketEventWrapper';
 import {SocketMock} from '../mocks/socket.mock';
 import {IOMock} from '../mocks/io.mock';
 
-describe('SocketEventWrapper', () => {
+describe.skip('SocketEventWrapper', () => {
     let socket: SocketMock;
     let io: IOMock;
     let socketEventWrapper: SocketEventWrapper;
