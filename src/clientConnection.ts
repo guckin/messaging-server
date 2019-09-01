@@ -1,6 +1,5 @@
 import {Socket} from 'socket.io';
-
-export type Room = string;
+import {Room} from './types/room';
 
 export class ClientConnection {
 

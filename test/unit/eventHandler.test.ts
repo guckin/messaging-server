@@ -2,7 +2,7 @@ import {EventHandler} from '../../src/eventHandler';
 import {getSocketMock} from './mockGenerators';
 import {Events} from '../../src/types/events';
 
-describe('EventHandler', () => {
+describe(EventHandler, () => {
 
     let eventHandler: EventHandler;
     let mockSocket: any;

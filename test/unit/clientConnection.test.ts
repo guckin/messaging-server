@@ -1,8 +1,9 @@
 import {getSocketMock} from './mockGenerators';
-import {Events} from '../../src/types/events';
-import {ClientConnection, Room} from '../../src/clientConnection';
 
-describe('ClientConnection', () => {
+import {ClientConnection} from '../../src/clientConnection';
+import {Room} from '../../src/types/room';
+
+describe(ClientConnection, () => {
 
     let clientConnection: ClientConnection;
     let mockSocket: any;
