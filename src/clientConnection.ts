@@ -14,4 +14,5 @@ export class ClientConnection {
     leaveRoom(room: Room) {
         this.socket.leave(room);
     }
+
 }
