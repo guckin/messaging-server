@@ -1,2 +1,2 @@
-import {messageServer} from './index';
-messageServer.start();
+import server from './index';
+server.listen(Number(process.env.PORT));

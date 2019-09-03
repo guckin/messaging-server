@@ -1,5 +1,8 @@
+import {Room} from './room';
+
 export interface Message {
     content: string;
-    author: string;
     date: string;
+    author: string;
+    room: Room;
 }

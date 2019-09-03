@@ -1,19 +1,20 @@
 import {createServer} from 'http';
 import * as express from 'express';
-import * as socketIo from 'socket.io';
-
-import config from './config';
-
-import {MessageService} from './messageService';
-import {MessagingServer} from './messagingServer';
-import {SocketEventWrapper} from './socketEventWrapper';
-import {MessageLog} from './messageLog';
+import * as cors from 'cors';
+import * as SocketIO from 'socket.io';
+import {MessagePersistence} from './messagePersistence';
+import {MessagingSocketService} from './messagingSocketService';
 
 const app = express();
-const server = createServer(app);
-const io = socketIo(server);
-const messageLog = new MessageLog(config.messageLogSize);
-const socketEventWrapper = new SocketEventWrapper(io);
-const messageService = new MessageService(messageLog, socketEventWrapper);
+const messagePersistence = new MessagePersistence();
 
-export const messageServer = new MessagingServer(server, config.port, messageService);
+app.use(cors());
+
+const server = createServer(app);
+const io = SocketIO(server);
+
+const socketService = new MessagingSocketService(io, messagePersistence);
+socketService.init();
+
+export default server;
+
