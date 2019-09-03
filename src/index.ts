@@ -4,11 +4,9 @@ import * as cors from 'cors';
 import * as SocketIO from 'socket.io';
 import {MessagePersistence} from './messagePersistence';
 import {MessagingSocketService} from './messagingSocketService';
-import {Room} from './types/room';
-import {Message} from './types/message';
 
 const app = express();
-const messagePersistence = new MessagePersistence(new Map<Room, Message[]>());
+const messagePersistence = new MessagePersistence();
 
 app.use(cors());
 

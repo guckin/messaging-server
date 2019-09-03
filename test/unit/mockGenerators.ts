@@ -27,8 +27,6 @@ export function getIoMock(inRoomMock: any): Server {
 
 export function getMockPersistence(): MessagePersistence {
     return {
-        getMessages: jest.fn(),
-        reset: jest.fn(),
         store: jest.fn()
     } as any;
 }
